@@ -1,36 +1,40 @@
 <template>
-  <div class="hello">
+  <div class="todo">
     <h1 > Vue ToDo List</h1>
     <b-card-header>
-      <b-row no-gutters align-v="center" align-h="end">
-      <b-col >
-        <b-form-checkbox v-model="openTask" name="check-button" switch>Undone Task</b-form-checkbox>
+      <b-row align-v="center" class="justify-content-md-end">
+      <b-col md="auto">
+        <b-form-checkbox v-model="openTask" name="check-button" switch>Undone Task ({{todoItem.filter(item => !item.done).length}}) </b-form-checkbox>
       </b-col>
-      <b-col >
-        <b-form-checkbox v-model="openTaskDone" name="check-button" switch>Done Task</b-form-checkbox>
+      <b-col md="auto">
+        <b-form-checkbox v-model="openTaskDone" name="check-button" switch>Done Task ({{todoItem.filter(item => item.done).length}})</b-form-checkbox>
       </b-col>
-      <b-col >
-        <b-button variant="danger" v-on:click="deleteCompletedTask">Delete Completed Task</b-button>
+      <b-col md="auto" v-if="todoItem.filter(item => item.done).length !== 0">
+        <b-button variant="danger" size="sm" v-on:click="deleteCompletedTask">
+          <Icon icon="ant-design:delete-filled" color="white" height="15" />
+          Done Tasks
+        </b-button>
       </b-col>
-      <b-col >
-        <b-button variant="danger" v-on:click="deleteAllTask">Delete All Task</b-button>
+      <b-col md="auto">
+        <b-button variant="danger" size="sm" v-on:click="deleteAllTask">
+          <Icon icon="ant-design:delete-filled" color="white" height="15" />
+          Tasks
+          </b-button>
       </b-col>
     </b-row>
     </b-card-header>
 
     <b-card-body>
       <b-list-group>
-        <!-- 如果勾選task item -->
         <b-list-group-item 
-          class="d-flex justify-content-between align-items-center" 
+          class="d-flex justify-content-start" 
           v-for="(item, index) in showList"
           :key="index"
           >
           
-          <!-- <div class="row"> -->
-            <div class="col-10" v-if="!item.done">
+            <div class="col-10 d-flex justify-content-start align-items-center" v-if="!item.done">
               <button type="button" class="btn btn-link"  v-on:click="item.done = true">
-                <Icon icon="akar-icons:circle-check-fill" color="green" height="20" v-if="!item.done"/>
+                <Icon icon="akar-icons:circle-check" color="green" height="20" v-if="!item.done"/>
               </button>
               <div v-if="!item.editing"> {{item.text}}</div>
               <b-form-input v-else
@@ -39,7 +43,7 @@
               >
               </b-form-input>
             </div>
-            <div class="col-10" v-if="item.done">
+            <div class="col-10 d-flex justify-content-start align-items-center" v-if="item.done">
               <button type="button" class="btn btn-link"  v-on:click="item.done = false">
               <Icon icon="akar-icons:circle-check-fill" color="grey" height="20" v-if="item.done"/>
               </button>
@@ -50,18 +54,22 @@
               >
               </b-form-input>
             </div>
-            <!-- edit button -->
-            <button button type="button" class="btn btn-link col-1"  v-on:click="item.editing = !item.editing">
-              <Icon icon="ant-design:edit-outlined" color="gray" height="20" />
-            </button>
-            <!-- delete button -->
-            <button type="button" class="btn btn-link col-1"  v-on:click="todoItem.splice(index,1)">
-              <Icon icon="ant-design:delete-filled" color="#d41d0d" height="20" />
-            </button>
+            <div class="col-2 d-flex justify-content-end align-items-center">
+              <!-- edit button -->
+              <button button type="button" class="btn btn-link"  v-on:click="item.editing = !item.editing">
+                <Icon icon="ant-design:edit-outlined" color="gray" height="20" />
+              </button>
+              <!-- delete button -->
+              <button type="button" class="btn btn-link"  v-on:click="todoItem.splice(index,1)">
+                <Icon icon="ant-design:delete-filled" color="#d41d0d" height="20" />
+              </button>
+
+            </div>
         </b-list-group-item>
       </b-list-group>
       
     </b-card-body>
+
   <b-card-footer>
     <b-form-input 
     v-model="typingTodo" 
@@ -69,6 +77,7 @@
     @keydown.enter="addTask"
     ></b-form-input>
   </b-card-footer>
+
   </div>
   
 </template>
@@ -77,7 +86,7 @@
 import { Icon } from '@iconify/vue';
 
 export default {
-  name: 'HelloWorld',
+  name: 'Todo',
   // props: {
   // },
   components:{
