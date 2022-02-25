@@ -1,7 +1,10 @@
 <template>
-  <div class="todo">
-    <h1 > Vue ToDo List</h1>
-    <b-card-header>
+  <div class="todo d-flex flex-column align-items-center">
+    <h1 class="display-4" > Vue ToDo List</h1>
+    <b-card no-body
+      style="width: 70vw;"
+    >
+      <b-card-header>
       <b-row align-v="center" class="justify-content-md-end">
       <b-col md="auto">
         <b-form-checkbox v-model="openTask" name="check-button" switch>Undone Task ({{todoItem.filter(item => !item.done).length}}) </b-form-checkbox>
@@ -23,8 +26,7 @@
       </b-col>
     </b-row>
     </b-card-header>
-
-    <b-card-body>
+    <b-card-body class="overflow-auto" style="max-height: 50vh;">
       <b-list-group>
         <b-list-group-item 
           class="d-flex justify-content-start" 
@@ -47,7 +49,7 @@
               <button type="button" class="btn btn-link"  v-on:click="item.done = false">
               <Icon icon="akar-icons:circle-check-fill" color="grey" height="20" v-if="item.done"/>
               </button>
-              <del v-if="!item.editing"> {{item.text}}</del>
+              <del v-if="!item.editing" class="text-left"> {{item.text}}</del>
               <b-form-input v-else
                 v-model="item.text"
                 @keydown.enter="item.editing = false"
@@ -67,9 +69,7 @@
             </div>
         </b-list-group-item>
       </b-list-group>
-      
     </b-card-body>
-
   <b-card-footer>
     <b-form-input 
     v-model="typingTodo" 
@@ -77,6 +77,8 @@
     @keydown.enter="addTask"
     ></b-form-input>
   </b-card-footer>
+
+    </b-card>
 
   </div>
   
