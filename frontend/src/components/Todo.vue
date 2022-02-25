@@ -21,7 +21,7 @@
       <b-col md="auto">
         <b-button variant="danger" size="sm" v-on:click="deleteAllTask">
           <Icon icon="ant-design:delete-filled" color="white" height="15" />
-          Tasks
+          All Tasks
           </b-button>
       </b-col>
     </b-row>
