@@ -20,7 +20,8 @@
           :item-count="doneItem.length"
         ></TodoSwitch>
       </b-col>
-      <b-col md="auto" v-if="doneItem.length !== 0">
+      <!-- v-if="doneItem.length !== 0" -->
+      <b-col md="auto" >
         <TodoButton
           button-text="Done Task"
           :click-method="deleteCompletedTask"
@@ -28,7 +29,8 @@
         ></TodoButton>
 
       </b-col>
-      <b-col md="auto" v-if="todoItem.length !== 0">
+      <!-- v-if="todoItem.length !== 0" -->
+      <b-col md="auto" >
           <TodoButton
           button-text="All Tasks"
           :click-method="deleteAllTask"
@@ -90,11 +92,14 @@ export default {
     }
   },
   methods:{
+    // function about clicking button
     deleteAllTask(){
       this.todoItem = []
+      // 讓按鈕的顏色變成藍色
     },
     deleteCompletedTask(){
       this.todoItem = this.todoItem.filter(item => !item.done)
+      // 讓按鈕的顏色變成藍色
     }
   },
   computed:{

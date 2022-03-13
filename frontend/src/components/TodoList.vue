@@ -5,6 +5,11 @@
           v-for="(item, index) in showList()"
           :key="index"
           >
+          <!-- <TodoListItem
+            v-model:item-name="item.text"
+            v-model:item-editing="item.editing"
+            :item-key="index"
+          ></TodoListItem> -->
             <div class="col-10 d-flex justify-content-start align-items-center" v-if="!item.done">
               <button type="button" class="btn btn-link"  @click="item.done = true">
                 <Icon icon="akar-icons:circle-check" color="green" height="20" v-if="!item.done"/>
@@ -69,7 +74,6 @@ export default({
   },
   data(){
     return{
-      // todoItem: this.parentTodoItem,
       undoneItem: this.parentUndoneItem,
       doneItem: this.parentDoneItem,
     }

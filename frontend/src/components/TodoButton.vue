@@ -1,11 +1,8 @@
 <template>
-    <!-- <p>
-            {{todoItem}}
-    </p> -->
-    <b-button variant="danger" size="sm" @click="clickMethod()">
+
+    <b-button variant="danger" size="sm" @click="clickingButton">
         <Icon icon="ant-design:delete-filled" color="white" height="15" />
         {{text}}
-        <!-- 這邊用傳入的東西做參數 -->
     </b-button>
 </template>
 
@@ -35,5 +32,13 @@
                 todoItem: this.parentTodoItem
             }
         },
+        methods:{
+            clickingButton(){
+                this.clickMethod();
+                console.log(event.target);
+                event.target.className = "btn btn-primary btn-sm"
+                // 把顏色變成藍色
+            }
+        }
     })
 </script>
