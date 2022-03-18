@@ -33,10 +33,10 @@
             }
         },
         methods:{
-            clickingButton(){
+            clickingButton(e){
                 this.clickMethod();
-                console.log(event.target);
-                event.target.className = "btn btn-primary btn-sm"
+                // console.log(event.target);
+                e.target.className = "btn btn-primary btn-sm"
                 // 把顏色變成藍色
             }
         }
