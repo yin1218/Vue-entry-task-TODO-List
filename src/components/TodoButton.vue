@@ -21,15 +21,12 @@
             'clickMethod':{
                 type: Function
             },
-            'parentTodoItem':{
-                type: Object
-            }
+            //  為何要 parentTodoItem
         },
         data(){
             return{
                 text: this.buttonText,
                 method: this.clickMethod,
-                todoItem: this.parentTodoItem
             }
         },
         methods:{
